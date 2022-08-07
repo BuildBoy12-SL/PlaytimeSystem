@@ -55,7 +55,7 @@ namespace PlaytimeSystem
                 startTimes[ev.Player.UserId] = Time.time;
 
             Playtime playtime = plugin.PlaytimeCollection.Get(ev.Player.UserId);
-            if (playtime != null && !string.Equals(playtime.Nickname, ev.Player.Nickname))
+            if (playtime != null)
             {
                 playtime.Nickname = ev.Player.Nickname;
                 plugin.PlaytimeCollection.Update(playtime);
