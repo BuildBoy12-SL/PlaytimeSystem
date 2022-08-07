@@ -54,7 +54,7 @@ namespace PlaytimeSystem.Commands.Client
         {
             string playerIdentifier = Player.Get(sender).UserId;
             if (arguments.Count != 0)
-                playerIdentifier = arguments.At(0);
+                playerIdentifier = string.Join(" ", arguments);
 
             Playtime playtime = Plugin.Instance.PlaytimeCollection.Get(playtime => playtime.UserId == playerIdentifier || playtime.Nickname == playerIdentifier);
             if (playtime == null)
