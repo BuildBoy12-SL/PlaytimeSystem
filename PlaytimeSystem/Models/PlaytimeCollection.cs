@@ -32,7 +32,10 @@ namespace PlaytimeSystem.Models
         /// <inheritdoc cref="ILiteCollection{T}.FindById(BsonValue)"/>
         public Playtime Get(string userId) => collection.FindById(userId);
 
-        /// <inheritdoc cref="ILiteCollection{T}.Find(Expression&lt;Func&lt;T, bool&gt;&gt;,int,int)"/>
+        /// <inheritdoc cref="ILiteCollection{T}.FindOne(Expression&lt;Func&lt;T, bool&gt;&gt;)"/>
+        public Playtime Get(Expression<Func<Playtime, bool>> predicate) => collection.FindOne(predicate);
+
+        /// <inheritdoc cref="ILiteCollection{T}.FindAll"/>
         public IEnumerable<Playtime> GetAll() => collection.FindAll();
 
         /// <inheritdoc cref="ILiteCollection{T}.Insert(T)"/>

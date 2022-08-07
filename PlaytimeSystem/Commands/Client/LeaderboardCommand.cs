@@ -37,7 +37,7 @@ namespace PlaytimeSystem.Commands.Client
         /// <summary>
         /// Gets or sets how to format the playtimes on the leaderboard.
         /// </summary>
-        [Description("How to format the playtimes on the leaderboard. Placeholders: {0}:Rank, {1}:Name, {2}:Playtime")]
+        [Description("How to format the playtimes on the leaderboard. Placeholders: {0}:Rank, {1}:Name, {2}:Playtime, {3}:FirstJoin")]
         public string LeaderboardFormat { get; set; } = "Leaderboard:\n{0}. {1} - {2}";
 
         /// <summary>
@@ -45,6 +45,12 @@ namespace PlaytimeSystem.Commands.Client
         /// </summary>
         [Description("The way that the timespan should be formatted.")]
         public string TimeFormat { get; set; } = "d'd 'h'h 'm'm 's's'";
+
+        /// <summary>
+        /// Gets or sets the format for the first connect date.
+        /// </summary>
+        [Description("The format for the first connect date.")]
+        public string FirstConnectFormat { get; set; } = "MM/dd/yyyy";
 
         /// <inheritdoc />
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -63,7 +69,7 @@ namespace PlaytimeSystem.Commands.Client
             int i = 1;
             foreach (Playtime playtime in playtimes)
             {
-                stringBuilder.AppendLine(string.Format(LeaderboardFormat, i, playtime.Nickname, playtime.ToTimespan().ToString(TimeFormat)));
+                stringBuilder.AppendLine(string.Format(LeaderboardFormat, i, playtime.Nickname, playtime.ToTimespan().ToString(TimeFormat), playtime.FirstConnect.ToString(FirstConnectFormat)));
                 i++;
             }
 

@@ -58,7 +58,7 @@ namespace PlaytimeSystem.Commands.RemoteAdmin
         /// <summary>
         /// Gets or sets the response to send when a playtime is found.
         /// </summary>
-        [Description("The response to send when a playtime is found. Available placeholders: {0}:PlayerName, {1}:Time")]
+        [Description("The response to send when a playtime is found. Available placeholders: {0}:PlayerName, {1}:FirstConnect, {2}:Time")]
         public string SuccessResponse { get; set; } = "{0}'s Playtime\nFirst Connect: {1}\nTotal: {2}";
 
         /// <summary>
