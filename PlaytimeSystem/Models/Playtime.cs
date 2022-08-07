@@ -15,6 +15,8 @@ namespace PlaytimeSystem.Models
     /// </summary>
     public class Playtime
     {
+        private double time;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Playtime"/> class.
         /// </summary>
@@ -41,7 +43,17 @@ namespace PlaytimeSystem.Models
         /// <summary>
         /// Gets or sets the amount of time, in seconds, that has been played.
         /// </summary>
-        public double Time { get; set; }
+        public double Time
+        {
+            get => time;
+            set
+            {
+                if (value < 0)
+                    value = 0;
+
+                time = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the date and time the player first connected to the server.
