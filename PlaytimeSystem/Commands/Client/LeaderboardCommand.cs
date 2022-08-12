@@ -35,10 +35,16 @@ namespace PlaytimeSystem.Commands.Client
         public int DisplayAmount { get; set; } = 10;
 
         /// <summary>
+        /// Gets or sets the title of the leaderboard.
+        /// </summary>
+        [Description("The title of the leaderboard.")]
+        public string LeaderboardTitle { get; set; } = "Top 10 Leaderboard";
+
+        /// <summary>
         /// Gets or sets how to format the playtimes on the leaderboard.
         /// </summary>
         [Description("How to format the playtimes on the leaderboard. Placeholders: {0}:Rank, {1}:Name, {2}:Playtime, {3}:FirstJoin")]
-        public string LeaderboardFormat { get; set; } = "Leaderboard:\n{0}. {1} - {2}";
+        public string LeaderboardFormat { get; set; } = "{0}. {1} - {2}";
 
         /// <summary>
         /// Gets or sets the way that the timespan should be formatted.
@@ -56,9 +62,9 @@ namespace PlaytimeSystem.Commands.Client
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             IEnumerable<Playtime> playtimes = Plugin.Instance.PlaytimeCollection.GetAll();
-            IOrderedEnumerable<Playtime> orderedPlaytimes = playtimes.OrderBy(playtime => playtime.Time);
+            IOrderedEnumerable<Playtime> orderedPlaytimes = playtimes.OrderByDescending(playtime => playtime.Time);
             IEnumerable<Playtime> topPlaytimes = orderedPlaytimes.Take(DisplayAmount);
-            response = FormatLeaderboard(topPlaytimes);
+            response = LeaderboardTitle + Environment.NewLine + FormatLeaderboard(topPlaytimes);
             return true;
         }
 
